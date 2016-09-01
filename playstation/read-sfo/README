@@ -1,0 +1,5 @@
+Prereq to run binary in Centos 7, not needed if you compile:
+yum install glibc-2.17-106.el7_2.8.i686
+
+How to compile:
+gcc read-sfo.c -o read-sfo 
