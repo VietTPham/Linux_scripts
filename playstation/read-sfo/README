@@ -1,3 +1,4 @@
+Code by Nicola Dalle Ave <rancido@ps3ita.it>
 Prereq to run binary in Centos 7, not needed if you compile:
 yum install glibc-2.17-106.el7_2.8.i686
 
