@@ -1,6 +1,6 @@
 #!/bin/bash
 #by: Viet Pham
-#Version: 2016.09.13
+#Version: 2016.09.15
 #Description: Linux bash that read sfo file and display its information
 
 #TODO: Add argument popup
@@ -19,11 +19,12 @@ tables_entries:\t$tables_entries"
 key_table_next=$key_table_start
 data_table_next=$data_table_start
 
-
 #key and data information
 for i in $(seq $tables_entries); do
+
   #key value
-  key=$(dd if=$1 bs=1 skip=$(($key_table_next)) status=none | cut -d '' -f1)
+  key=$(dd if=$1 bs=1 skip=$(($key_table_next)) status=none| head -n1 | sed 's/\x0.*$//g')
+
   #increment key value
   key_table_next=$(printf "0x%08x\n" $(($key_table_next + $(echo $key | wc -m))))
   
@@ -36,11 +37,13 @@ for i in $(seq $tables_entries); do
   #data is calculated using data_table_start + data_offset
   data=$(dd if=$1 bs=1 skip=$(($data_offset + $data_table_start)) count=$((data_len - 1)) status=none )
   if [ $data_len -eq 4 ]; then
-	#data=$(printf "0x%x2" $(echo $data | rev) 2>/dev/null)
 	data=$(dd if=$1 bs=1 skip=$(($data_offset + $data_table_start)) count=$((data_len - 1)) status=none | od -A n -t x1 | awk '{print "0x"$3$2$1}')
   fi
+
   #append key and data to output
   output="$output\n$(printf "%s:\t%s" $key "$data")"
 done
+
 #display the ouput in a nice format
 printf "$output\n" | column -t -s $'\t'
+
