@@ -1,7 +1,7 @@
 #!/bin/bash
 #by: Viet Pham
 #Version: 2016.09.13
-
+#Description: Convert vtt subtitle to srt
 if [ $# -lt 1 ]; then
   echo "How to use: $0 <list of vtt file>"
   exit 1

@@ -1,4 +1,7 @@
 #!/bin/bash
+#by: Viet Pham
+#Version: 2016.08.29
+#Description: Extract subtitle from a video file
 
 if [ $# -lt 2 ]; then
   echo "How to use: $0 <track number> <list of files>"
