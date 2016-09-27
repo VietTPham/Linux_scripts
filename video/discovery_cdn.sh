@@ -1,4 +1,7 @@
 #!/bin/bash
+#by: Viet Pham
+#Version: 2016.09.27
+#Description: Used to download cdn content from the Discovery network family
 
 curl -o $1.vtt https://fusion.ddmcdn.com/subtitles/$(cut -d'/' -f5-8 <<< $2| sed 's/-,.*//').vtt
 
