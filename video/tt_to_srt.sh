@@ -15,5 +15,5 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 for tt in "${@:1}"; do
-  grep begin $tt | nl | sed 's/^[ ]*\([0-9]*\).*begin="\(.\{11\}\)" end="\(.\{11\}\)".*">\(.*\)<\/p>/\1 \n\2 --> \3\ \n\4/g' | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}' > $(sed 's/\..*/.srt/' <<< $tt)
+  grep begin $tt | nl | sed 's/^[ ]*\([0-9]*\).*begin="\(.\{8\}\)\:\(.*\)" end="\(.\{8\}\)\:\([0-9]*\)".*>\(.*\)<\/p>/\1 \n\2,\3 --> \4,\5 \n\6\n /g' | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}' > $(sed 's/\..*/.srt/' <<< $tt)
 done
